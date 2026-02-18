@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Allocation Summary">
+        <div class="slds-p-around_medium">
+
+            <template if:true={summaryData}>
+                <template for:each={summaryData} for:item="item">
+                    <div key={item.resource} class="slds-m-bottom_small">
+                        <strong>{item.resource}</strong>
+                        <lightning-progress-bar
+                            value={item.total}
+                            size="medium">
+                        </lightning-progress-bar>
+                        <div>{item.total}% Allocated</div>
+                    </div>
+                </template>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

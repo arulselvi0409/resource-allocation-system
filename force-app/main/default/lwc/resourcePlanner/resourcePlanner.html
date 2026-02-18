@@ -1,0 +1,72 @@
+<template>
+    <lightning-card title="Resource Allocation System">
+        <div class="slds-m-around_medium">
+
+            <!-- Filters Section -->
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col">
+                    <lightning-combobox
+                        label="Select Team Member"
+                        value={selectedResource}
+                        options={resourceOptions}
+                        onchange={handleResourceChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-combobox
+                        label="Select Project"
+                        value={selectedProject}
+                        options={projectOptions}
+                        onchange={handleProjectChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-input
+                        type="number"
+                        label="Allocation %"
+                        value={percentage}
+                        onchange={handlePercentageChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-align-bottom">
+                    <lightning-button
+                        label="Allocate"
+                        variant="brand"
+                        onclick={handleAllocate}>
+                    </lightning-button>
+                </div>
+
+            </div>
+
+            <!-- View Filter Buttons -->
+            <div class="slds-m-top_medium">
+                <strong>View:</strong>
+                <lightning-button-group class="slds-m-left_small">
+                    <lightning-button label="All" onclick={showAll}></lightning-button>
+                    <lightning-button label="In Progress" onclick={showInProgress}></lightning-button>
+                    <lightning-button label="Completed" onclick={showCompleted}></lightning-button>
+                </lightning-button-group>
+            </div>
+
+            <!-- Datatable -->
+            <lightning-datatable
+                key-field="Id"
+                data={filteredAllocations}
+                columns={columns}
+                draft-values={draftValues}
+                onsave={handleSave}
+                onrowaction={handleRowAction}
+                class="slds-m-top_medium">
+            </lightning-datatable>
+
+        </div>
+    </lightning-card>
+
+    <!-- Allocation Summary Component -->
+    <c-allocation-chart class="slds-m-top_medium"></c-allocation-chart>
+
+</template>
